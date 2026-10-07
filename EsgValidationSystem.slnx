@@ -1,2 +1,6 @@
 <Solution>
+  <Project Path="ComplianceService/ComplianceService.csproj" />
+  <Project Path="SupplierService/SupplierService.csproj" />
+  <Project Path="ApiGateway/ApiGateway.csproj" />
+  <Project Path="NotificationService/NotificationService.csproj" />
 </Solution>
