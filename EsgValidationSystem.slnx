@@ -1,2 +1,4 @@
 <Solution>
+  <Project Path="ComplianceService/ComplianceService.csproj" />
+  <Project Path="SupplierService/SupplierService.csproj" />
 </Solution>
