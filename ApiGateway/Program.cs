@@ -1,5 +1,7 @@
-using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.RateLimiting;
+using OpenTelemetry.Trace;
+using System.Threading.RateLimiting;
+using OpenTelemetry.Metrics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,16 @@ builder.Services.AddRateLimiter(options =>
 // YARP configuration from appsettings.json 
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+
+
+
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracing =>
+    {
+        tracing.AddAspNetCoreInstrumentation() // Gateway ma chhireko request track garcha
+               .AddHttpClientInstrumentation()   // Gateway le aru service lai gareko call track garcha
+               .AddConsoleExporter();          // Ahile ko lagi terminal mai visual log dekhaucha
+    });
 
 var app = builder.Build();
 
