@@ -32,7 +32,12 @@ builder.Services.AddOpenTelemetry()
     {
         tracing.AddAspNetCoreInstrumentation() // Gateway ma chhireko request track garcha
                .AddHttpClientInstrumentation()   // Gateway le aru service lai gareko call track garcha
-               .AddConsoleExporter();          // Ahile ko lagi terminal mai visual log dekhaucha
+                                                 //.AddConsoleExporter();          // Ahile ko lagi terminal mai visual log dekhaucha
+               .AddOtlpExporter(options =>
+               {
+                   // Docker maa chalirako Jaeger ko address
+                   options.Endpoint = new Uri("http://localhost:4317");
+               });
     });
 
 var app = builder.Build();

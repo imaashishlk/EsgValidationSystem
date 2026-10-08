@@ -19,3 +19,11 @@ services:
       - "5672:5672"   # Message pathaune port
       - "15672:15672" # Browser maa herne UI port
     restart: always
+  
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: esg_jaeger
+    ports:
+      - "16686:16686" # Web UI port
+      - "4317:4317"   # OTLP gRPC port (Data receive garne)
+    restart: always
